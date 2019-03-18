@@ -5,3 +5,4 @@ CREATE TABLE spndr_income (
   add_savings NUMERIC NOT NULL,
   date_created timestamp not null default now()
 );
+

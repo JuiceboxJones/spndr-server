@@ -4,7 +4,7 @@ create table spndr_users (
   full_name text not null,
   password text not null,
   date_created timestamp not null default now(),
-  date modified timestamp
+  date_modified timestamp
 );
 
 alter table spndr_expenses
