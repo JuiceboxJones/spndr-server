@@ -8,9 +8,10 @@ const { requireAuth } = require('../middleware/jwt-auth');
 const wishlistRouter = express.Router();
 const jsonBodyParser = express.json();
 
+
 wishlistRouter
   .route('/')
-  .all(requireAuth)
+  //.all(requireAuth)
   .post(jsonBodyParser, (req, res, next) => {
     const { user_id, name, url, price } = req.body;
     const newWishlistEntry = { user_id, name, url, price}; 
@@ -30,7 +31,24 @@ wishlistRouter
         res
           .status(201)
           .location(path.posix.join(req.originalUrl, `/${wishlist.id}`))
-          .json(WishlistService.serializeWishlistEntry(wishlist));
+          .json(WishlistService.serializeWish(wishlist));
+      })
+      .catch(next);
+  });
+
+wishlistRouter
+  .route('/:user_id')
+  .get((req, res, next) => {
+    const {user_id} = req.params;
+    WishlistService.getById(req.app.get('db'), user_id)
+      .then(wish => {
+        if(!wish) {
+          return res.status(404).json({
+            error: {message: 'Wishlist not found'}
+          });
+        }
+        res.status(200).json(wish);
+        next();
       })
       .catch(next);
   });

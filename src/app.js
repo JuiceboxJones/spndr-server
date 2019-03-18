@@ -9,6 +9,7 @@ const expenseRouter = require('./expenses/expenses-router');
 const wishlistRouter = require('./wishlist/wishlist-router');
 const authRouter = require('./auth/auth-router');
 const usersRouter = require('./users/user-router');
+const incomeRouter = require('./income/income-router');
 
 const app = express();
 
@@ -22,8 +23,10 @@ app.use(helmet());
 
 app.use('/api/expenses', expenseRouter);
 app.use('/api/wishlist', wishlistRouter);
+app.use('/api/income', incomeRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
+
 
 app.use(function errorHandler(error, req, res, next) {
   let response;

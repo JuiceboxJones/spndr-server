@@ -1,35 +1,13 @@
+'use strict';
+
 const xss = require('xss')
 
 const expenseService = {
   getById(db, id) {
     return db
-      .from('spndr_expenses AS exp')
-      .select(
-        'exp.id',
-        'exp.amount',
-        'exp.name',
-        'exp.date_created',
-        'exp.user_id',
-        db.raw(
-          `row_to_json(
-            (SELECT tmp FROM (
-              SELECT
-                usr.id,
-                usr.user_name,
-                usr.full_name,
-                usr.date_created,
-                usr.date_modified
-            ) tmp)
-          ) AS "user"`
-        )
-      )
-      .leftJoin(
-        'spndr_users AS usr',
-        'exp.user_id',
-        'usr.id',
-      )
-      .where('exp.id', id)
-      .first()
+      .from('spndr_expenses')
+      .select('*')
+      .where('user_id', id);
   },
 
   insertReview(db, newExpense) {
@@ -40,7 +18,7 @@ const expenseService = {
       .then(([expense]) => expense)
       .then(expense =>
         expensesService.getById(db, expense.id)
-      )
+      );
   },
 
   serializeExpense(expense) {
@@ -55,4 +33,4 @@ const expenseService = {
   }
 }
 
-module.exports = expenseService
+module.exports = expenseService;

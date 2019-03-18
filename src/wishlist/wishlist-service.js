@@ -1,35 +1,14 @@
-const xss = require('xss')
+'use strict';
+
+const xss = require('xss');
 
 const WishlistService = {
+  
   getById(db, id) {
     return db
-      .from('spndr_wishlist AS wish')
-      .select(
-        'wish.id',
-        'wish.name',
-        'wish.url',
-        'wish.date_created',
-        'wish.user_id',
-        db.raw(
-          `row_to_json(
-            (SELECT tmp FROM (
-              SELECT
-                usr.id,
-                usr.user_name,
-                usr.full_name,
-                usr.date_created,
-                usr.date_modified
-            ) tmp)
-          ) AS "user"`
-        )
-      )
-      .leftJoin(
-        'spndr_users AS usr',
-        'wish.user_id',
-        'usr.id',
-      )
-      .where('rev.id', id)
-      .first()
+      .from('spndr_wishlist')
+      .select('*')
+      .where('user_id', id);
   },
 
   insertWish(db, newWish) {
@@ -40,7 +19,7 @@ const WishlistService = {
       .then(([wish]) => wish)
       .then(wish =>
         WishlistService.getById(db, wish.id)
-      )
+      );
   },
 
   serializeWish(wishlist) {
@@ -50,9 +29,9 @@ const WishlistService = {
       url: xss(wishlist.url),
       user_id: wishlist.user_id,
       date_created: wishlist.date_created,
-      user: wishlist.user || {},
-    }
+      price: wishlist.price,
+    };
   }
-}
+};
 
-module.exports = WishlistService
+module.exports = WishlistService;
