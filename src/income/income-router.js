@@ -31,7 +31,7 @@ incomeRouter
   .post(jsonBodyParser, (req, res, next) => {
     const { bank_balance, income, add_savings } = req.body;
     const newIncome = { bank_balance, income, add_savings };
-
+    
     for (const [key, value] of Object.entries(newIncome))
       if (value == null)
         return res.status(400).json({
@@ -46,6 +46,22 @@ incomeRouter
           .status(201)
           .location(path.posix.join(req.originalUrl, `/${income.id}`))
           .json(income);
+      })
+      .catch(next);
+  });
+
+incomeRouter
+  .route('/:income_id')
+  .delete((req, res, next) => {
+    incomeService
+      .deleteIncome(req.app.get('db'), req.params.income_id)
+      .then(inc => {
+        if (!inc) {
+          return res.status(404).json({ error: {message: 'income not found'}
+          });
+        }
+        res.status(204).end();
+        next();
       })
       .catch(next);
   });

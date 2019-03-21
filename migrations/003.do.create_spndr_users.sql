@@ -1,3 +1,5 @@
+drop table if exists spndr_users;
+
 create table spndr_users (
   id serial primary key,
   user_name text not null unique,

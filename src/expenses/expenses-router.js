@@ -47,4 +47,20 @@ expenseRouter
       .catch(next);
   });
 
+expenseRouter
+  .route('/:item_id')
+  .delete((req, res, next) => {
+    expenseService
+      .deleteExpense(req.app.get('db'), req.params.item_id)
+      .then(exp => {
+        if (!exp) {
+          return res.status(404).json({ error: {message: 'item not found'}
+          });
+        }
+        res.status(204).end();
+        next();
+      })
+      .catch(next);
+  });
+
 module.exports = expenseRouter;

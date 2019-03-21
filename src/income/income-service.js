@@ -15,6 +15,11 @@ const incomeService = {
       .returning('*')
       .then(([income]) => income);
   },
+  deleteIncome(db, id){
+    return db('spndr_income')
+      .where({ id })
+      .delete();
+  }
 };
 
 module.exports = incomeService;

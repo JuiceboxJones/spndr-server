@@ -18,6 +18,12 @@ const expenseService = {
       .then(([expense]) => expense);
   },
 
+  deleteExpense(db, id){
+    return db('spndr_expenses')
+      .where({ id })
+      .delete();
+  },
+
   serializeExpense(expense) {
     return {
       id: expense.id,
