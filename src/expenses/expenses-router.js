@@ -12,8 +12,8 @@ expenseRouter
   .route('/')
   .all(requireAuth)
   .post(jsonBodyParser, (req, res, next) => {
-    const { user_id, name, amount } = req.body;
-    const newExpense = { user_id, name, amount };
+    const { name, amount } = req.body;
+    const newExpense = { name, amount };
 
     for (const [key, value] of Object.entries(newExpense))
       if (value == null)
@@ -34,9 +34,8 @@ expenseRouter
   });
 
 expenseRouter
-  .route('/:user_id').get((req, res, next) => {
-    const { user_id } = req.params;
-    expenseService.getById(req.app.get('db'), user_id).then(exp => {
+  .route('/').get((req, res, next) => {
+    expenseService.getById(req.app.get('db'), req.user.id).then(exp => {
       if (!exp) {
         return res.status(404).json({
           error: { message: 'Expenses not found' }

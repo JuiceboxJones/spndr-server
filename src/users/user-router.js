@@ -4,8 +4,14 @@ const express = require('express');
 const path = require('path');
 const UsersService = require('./user-service');
 
+
 const usersRouter = express.Router();
 const jsonBodyParser = express.json();
+usersRouter
+  .route('/')
+  .get((req, res, next) => {
+    res.send(req.user);
+  });
 
 usersRouter.post('/', jsonBodyParser, (req, res, next) => {
   const { password, user_name, full_name} = req.body;

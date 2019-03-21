@@ -1,6 +1,5 @@
 'use strict';
 
-const xss = require('xss')
 
 const incomeService = {
   getById(db, id) {
@@ -9,16 +8,13 @@ const incomeService = {
       .select('*')
       .where('expenses_id', id);
   },
-  serializeIncome(income) {
-    return {
-      id: income.id,
-      bank_balance: income.bank_balance,
-      income: income.income,
-      expenses_id: income.expenses_id,
-      date_created: income.date_created,
-      savings: income.add_savings || {},
-    }
-  }
-}
+  insertIncome(db, newIncome) {
+    return db
+      .insert(newIncome)
+      .into('spndr_income')
+      .returning('*')
+      .then(([income]) => income);
+  },
+};
 
 module.exports = incomeService;

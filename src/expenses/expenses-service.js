@@ -10,15 +10,12 @@ const expenseService = {
       .where('user_id', id);
   },
 
-  insertReview(db, newExpense) {
+  insertExpense(db, newExpense) {
     return db
       .insert(newExpense)
       .into('spndr_expenses')
       .returning('*')
-      .then(([expense]) => expense)
-      .then(expense =>
-        expensesService.getById(db, expense.id)
-      );
+      .then(([expense]) => expense);
   },
 
   serializeExpense(expense) {

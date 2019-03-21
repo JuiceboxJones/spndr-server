@@ -16,10 +16,13 @@ const WishlistService = {
       .insert(newWish)
       .into('spndr_wishlist')
       .returning('*')
-      .then(([wish]) => wish)
-      .then(wish =>
-        WishlistService.getById(db, wish.id)
-      );
+      .then(([wish]) => wish);
+  },
+
+  deleteWish(db, id){
+    return db('spndr_wishlist')
+      .where({ id })
+      .delete();
   },
 
   serializeWish(wishlist) {

@@ -15,9 +15,9 @@ truncate
 
 insert into spndr_users (user_name, full_name, password)
 values
-('Jack123', 'Jack Johnson', 'password'),
-('Jill456', 'Jillian Giraldi', 'ilovecats'),
-('Ron890',' Dan Boomstein', 'gunsandbros69');
+('Jack123', 'Jack Johnson', '$2a$12$dkh0ykTj3YbuxOtnb6yWg.a35Slm4aiZpiT9tTbhyw25yAH4CnFF6'),
+('Jill456', 'Jillian Giraldi', '$2a$12$77iifP343T8qmC45BxuZUewfbg/h1FgSOGp7E4p38ZrAXDuSuWW1O'),
+('Ron890',' Dan Boomstein', '$2a$12$Mntn6UWgru7jgZ355sn/kON9ui/08Lcr4wU5wFvEtbiJdjat3zyOG');
 
 insert into spndr_expenses (user_id, name, amount)
 values

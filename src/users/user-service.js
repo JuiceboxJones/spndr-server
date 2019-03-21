@@ -8,6 +8,12 @@ const bcrypt = require('bcryptjs');
 const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/;
 
 const UsersService = {
+  getUserId(db, userName) {
+    return db
+      .from('spndr_users')
+      .select('id')
+      .where('user_name', userName);
+  },
   hasUserWithUserName(db, user_name) {
     return db('spndr_users')
       .where({ user_name })
