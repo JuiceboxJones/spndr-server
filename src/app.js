@@ -19,14 +19,14 @@ app.use(
     skip: () => NODE_ENV === 'test'
   })
 );
-app.use(cors({ origin: config.CLIENT_ORIGIN }));
+app.use(cors());
 app.use(helmet());
 
-app.use('/api/expenses', expenseRouter);
-app.use('/api/wishlist', wishlistRouter);
-app.use('/api/income', incomeRouter);
-app.use('/api/auth', authRouter);
-app.use('/api/users', usersRouter);
+app.use('/expenses', expenseRouter);
+app.use('/wishlist', wishlistRouter);
+app.use('/income', incomeRouter);
+app.use('/auth', authRouter);
+app.use('/users', usersRouter);
 
 
 app.use(function errorHandler(error, req, res, next) {
