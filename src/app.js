@@ -10,6 +10,7 @@ const wishlistRouter = require('./wishlist/wishlist-router');
 const authRouter = require('./auth/auth-router');
 const usersRouter = require('./users/user-router');
 const incomeRouter = require('./income/income-router');
+const config = require('./config');
 
 const app = express();
 
@@ -18,7 +19,7 @@ app.use(
     skip: () => NODE_ENV === 'test'
   })
 );
-app.use(cors());
+app.use(cors({ origin: config.CLIENT_ORIGIN}));
 app.use(helmet());
 
 app.use('/api/expenses', expenseRouter);
