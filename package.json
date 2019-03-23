@@ -26,7 +26,8 @@
     "morgan": "^1.9.1",
     "path": "^0.12.7",
     "postgrator": "^3.9.0",
-    "xss": "^1.0.3"
+    "xss": "^1.0.3",
+    "pg": "*"
   },
   "devDependencies": {
     "chai": "^4.2.0",
