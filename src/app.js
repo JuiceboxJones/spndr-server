@@ -10,7 +10,7 @@ const wishlistRouter = require('./wishlist/wishlist-router');
 const authRouter = require('./auth/auth-router');
 const usersRouter = require('./users/user-router');
 const incomeRouter = require('./income/income-router');
-const config = require('./config');
+const {CLIENT_ORIGIN} = require('./config');
 
 const app = express();
 
