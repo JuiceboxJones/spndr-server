@@ -7,5 +7,5 @@ CREATE TABLE spndr_expenses (
 
 alter table spndr_income
   add column
-    expenses_id integer references spndr_expenses(id)
+    user_id integer references spndr_users(id)
     on delete set null;

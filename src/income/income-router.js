@@ -28,16 +28,17 @@ incomeRouter
 
 incomeRouter
   .route('/')
+  .all(requireAuth)
   .post(jsonBodyParser, (req, res, next) => {
     const { bank_balance, income, add_savings } = req.body;
     const newIncome = { bank_balance, income, add_savings };
-    
     for (const [key, value] of Object.entries(newIncome))
       if (value == null)
         return res.status(400).json({
           error: `Missing '${key}' in request body`
         });
-    newIncome.expenses_id = req.user.id;
+    newIncome.user_id = req.user.id;
+
 
     incomeService
       .insertIncome(req.app.get('db'), newIncome)
@@ -52,6 +53,7 @@ incomeRouter
 
 incomeRouter
   .route('/:income_id')
+  .all(requireAuth)
   .delete((req, res, next) => {
     incomeService
       .deleteIncome(req.app.get('db'), req.params.income_id)
