@@ -28,7 +28,6 @@ incomeRouter
 
 incomeRouter
   .route('/')
-  .all(requireAuth)
   .post(jsonBodyParser, (req, res, next) => {
     const { bank_balance, income, add_savings } = req.body;
     const newIncome = { bank_balance, income, add_savings };
@@ -53,7 +52,6 @@ incomeRouter
 
 incomeRouter
   .route('/:income_id')
-  .all(requireAuth)
   .delete((req, res, next) => {
     incomeService
       .deleteIncome(req.app.get('db'), req.params.income_id)

@@ -6,7 +6,7 @@ const incomeService = {
     return db
       .from('spndr_income')
       .select('*')
-      .where('expenses_id', id);
+      .where('user_id', id);
   },
   insertIncome(db, newIncome) {
     return db
