@@ -13,3 +13,8 @@ alter table spndr_expenses
   add column
     user_id integer references spndr_users(id)
     on delete set null;
+
+alter table spndr_income
+  add column
+    user_id integer references spndr_users(id)
+    on delete set null;
