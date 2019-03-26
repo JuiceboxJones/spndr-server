@@ -3,9 +3,6 @@ CREATE TABLE spndr_expenses (
   name text not null,
   amount numeric not null,
   date_created timestamp not null default now()
+  user_id integer 
+   references spndr_users(id) on delete cascade not null
 );
-
-alter table spndr_income
-  add column
-    user_id integer references spndr_users(id)
-    on delete set null;
