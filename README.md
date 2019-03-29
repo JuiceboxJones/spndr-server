@@ -1,17 +1,17 @@
-##Spndr API
+# Spndr API
 
 This API is for use with the SPNDR Client only.
 
-##-Endpoints-
+# -Endpoints-
 
-##Authorization
+## Authorization
 
 '/auth/login'
 
 POST only. This endpoint is used for the authentication of user credentials.
 user_name and password are required.
 
-##Users
+## Users
 
 '/users'
 
@@ -21,7 +21,7 @@ the creation of new users.
 POST requires 'password', 'user_name', and 'full_name'
 GET requires 'user_name' and 'user_id'
 
-##Expenses
+## Expenses
 
 '/expenses'
 
@@ -35,7 +35,7 @@ endpoint for DELETE
 '/expenses/:item_id'
 DELETE requires 'id'
 
-##Income
+## Income
 
 '/income'
 
@@ -49,7 +49,7 @@ endpoint for DELETE
 '/income/:income_id'
 DELETE requires 'id'
 
-##Wishlist
+## Wishlist
 
 '/wishlist'
 
