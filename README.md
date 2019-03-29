@@ -9,7 +9,7 @@ This API is for use with the SPNDR Client only.
 '/auth/login'
 
 POST only. This endpoint is used for the authentication of user credentials.
-user_name and password are required.
+POST requires 'user_name' and 'password'
 
 ## Users
 
